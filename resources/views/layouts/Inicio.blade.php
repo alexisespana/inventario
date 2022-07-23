@@ -23,7 +23,7 @@
 
     @include('layouts.Menu_Vertical.Menu_Vertical')
 
-    <div id="main">
+    <div id="main" class="main-full">
         <div class="row">
             <div class="content-wrapper-before gradient-45deg-indigo-purple"></div>
             <div class="col s12">

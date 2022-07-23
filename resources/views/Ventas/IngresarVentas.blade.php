@@ -2,10 +2,8 @@
 
 @section('title', 'Registrar Ventas')
 @section('css')
-    {{-- <link rel="stylesheet" href="{{ asset('css/Datatables/select.dataTables.min.css') }}"> --}}
-    {{-- <link rel="stylesheet" href="{{ asset('css/Datatables/data-tables.min.css') }}"> --}}
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.17/dist/sweetalert2.min.css">
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css">
+    <link rel="stylesheet" href="{{ asset('css/autocomplete/jquery-iu.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/sweetAlert/sweetAlert.min.css') }}">
 
 
     <style>
@@ -20,7 +18,7 @@
         <div class="container">
             <section class="invoice-edit-wrapper section">
                 <div class="row">
-                    <div class="col xl10 m8 s12">
+                    <div class="col s12">
                         <div class="card">
                             <div class="card-content px-36">
                                 <div class="invoice-product-details">
@@ -152,12 +150,10 @@
         </div>
     </div>
 @section('scripts')
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.17/dist/sweetalert2.min.js"></script>
-    {{-- <script src="{{ asset('js/Formatter/jquery.formatter.min.js') }}"></script> --}}
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.8/jquery.mask.min.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js" type="text/javascript"></script>
-
+    <script src="{{asset('js/sweetAlert/sweetalert2.min.js')}}"></script>
+    <script src="{{asset('js/mask/mask.min.js')}}"></script>
+    <script src="{{asset('js/autocomplete/jquery-ui.min.js')}}"></script>
+  
     <script>
         $(document).ready(function() {
             $('.autocomplete').autocomplete({
