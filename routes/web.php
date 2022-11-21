@@ -31,7 +31,7 @@ Route::prefix('productos')->group(function () {
     // Route::get('/lista', 'Productos\ListarProductosController@listarProductos')
 });
 Route::prefix('ventas')->group(function () {
-    Route::get('/listar', [VentasController::class, 'listarVentas'])->name('lista-ventas');
+    Route::any('/listar', [VentasController::class, 'listarVentas'])->name('lista-ventas');
     Route::post('/registrar', [VentasController::class, 'registrarVentas'])->name('registrar-venta');
     Route::get('/detalles', [VentasController::class, 'DetallesVentas'])->name('detalles-venta');
 });

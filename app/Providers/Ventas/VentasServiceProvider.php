@@ -22,7 +22,7 @@ class VentasServiceProvider extends ServiceProvider
     public function listarVentas($idproducto)
     {
         $response = $this->envioParametros('GET', "Ventas/listar", $idproducto);
-        //  dd($response, 'estoy en ventas');
+          //dd($response, 'estoy en ventas');
 
         return $response;
     }
