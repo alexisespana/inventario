@@ -54,7 +54,7 @@
     <script src="{{ asset('js/custom-script.min.js') }}"></script>
     <script src="{{ asset('js/customizer.min.js') }}"></script>
     <script src="{{ asset('js/dashboard-modern.js') }}"></script>
-
+    
 
     @yield('scripts')
     <script>
@@ -86,7 +86,7 @@
             $('.modal').modal();
             $('tabs').tabs();
              $('.tooltipped').tooltip();
-             $('select').material_select();
+           //  $('select').material_select();
 
             
         });

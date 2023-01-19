@@ -36,9 +36,7 @@
                                 @isset($item->precio->precio)
                                     <td>{!! Str::miles($item->precio->precio) !!}</td>
                                 @endisset
-                                @isset($item->stock->precio_compra->precio)
-                                    <td>{!! $item->stock->precio_compra->precio !!}------{!! $item->stock->precio_compra->id !!}</td>
-                                @endisset
+                              
                                 <td><a onclick="editar(this)" id="{!! $item->codigo !!}"
                                         class="invoice-action-edit mr-4 green-text lightrn-1 modal-trigger"
                                         href="#editarProductos">

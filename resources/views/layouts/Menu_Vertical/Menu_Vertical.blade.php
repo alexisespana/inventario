@@ -25,6 +25,9 @@
                     <li><a href="/productos/lista"><i class="material-icons">radio_button_unchecked</i><span
                                 data-i18n="Analytics">Lista de Productos</span></a>
                     </li>
+                    <li><a href="/ventas/resumen"><i class="material-icons">radio_button_unchecked</i><span
+                        data-i18n="Analytics">Gráfico Ventas</span></a>
+            </li>
                 </ul>
             </div>
         </li>

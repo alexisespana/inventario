@@ -117,7 +117,9 @@
                 max: new Date(2020, 0, 1),
             });
 
-            $(document).on("click", ".guardar", function(e) {
+           
+        });
+         $(document).on("click", ".guardar", function(e) {
 
                 var form = $(".form"); // Agrega esta línea
 
@@ -145,6 +147,5 @@
                     }
                 })
             });
-        });
     </script>
 @endsection

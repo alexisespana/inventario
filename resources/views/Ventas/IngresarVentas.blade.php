@@ -22,6 +22,7 @@
                     <div class="card">
                         <div class="card-content px-36">
                             <div class="invoice-product-details">
+                                
 
                                 <div class="row">
                                     <div class="input-field col s3 pull-s0 ">
@@ -38,6 +39,11 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="card-alert card red lighten-5 hide">
+                                    <div class="card-content red-text prodNoEncontrado">
+                                    </div>
+                                  
+                                  </div>
                                 <div class="divider mb-3 mt-3"></div>
                                 <table class="common">
                                     <thead>
@@ -387,6 +393,7 @@
 
     }
     $(".buscarProducto").keyup(function(e) {
+        $('.prodNoEncontrado').parent().addClass('hide');
         var codigo = $(this).val();
         var code = e.key; // recommended to use e.key, it's normalized across devices and languages
         if (code === "Enter") e.preventDefault();
@@ -412,14 +419,18 @@
 
 
                     if (response.length >= 1) {
+                        
 
                         addNewRow(response);
                         $('.buscarProducto').val('');
                         $('.pagar').removeClass('disabled');
                     }
-                    // else{
-                    //     alert('producto no encontrado');
-                    // }
+                    else{
+                        $('.buscarProducto').val('');
+
+                         $('.prodNoEncontrado').parent().removeClass('hide');
+                         $('.prodNoEncontrado').html('<p>Producto no encontrado</p>');
+                     }
 
 
                 },
@@ -476,7 +487,7 @@
                     'No se registró la venta, ha sido cancelada',
                     'error'
                 )
-                window.location.replace("/");
+              
             }
         })
 

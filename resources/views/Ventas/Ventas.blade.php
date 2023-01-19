@@ -45,10 +45,10 @@
                             </div>
                             <div class="card-action">
 
-                                <div class="row">
-                                    <div class="col s6 push-2"><span ><i class="material-icons ">credit_card</i> Ventas debito: ${!! $resumenVentas->debito !!}</span></div>
-                                    <div class="col s6 push-5"><span ><i class="material-icons ">attach_money</i> Ventas efectivo: ${!! $resumenVentas->efectivo !!}</span></div>
-                                </div>
+                                <!--<div class="row">
+                                    <div class="col s6 push-2"><span ><i class="material-icons ">credit_card</i> Ventas debito: ${--!! $resumenVentas->debito !!}</span></div>
+                                    <div class="col s6 push-5"><span ><i class="material-icons ">attach_money</i> Ventas efectivo: ${--!! $resumenVentas->efectivo !!}</span></div>
+                                </div>-->
 
 
                             </div>

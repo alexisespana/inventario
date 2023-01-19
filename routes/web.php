@@ -34,4 +34,6 @@ Route::prefix('ventas')->group(function () {
     Route::any('/listar', [VentasController::class, 'listarVentas'])->name('lista-ventas');
     Route::post('/registrar', [VentasController::class, 'registrarVentas'])->name('registrar-venta');
     Route::get('/detalles', [VentasController::class, 'DetallesVentas'])->name('detalles-venta');
+    Route::any('/resumen', [VentasController::class, 'ResumenVentas'])->name('resumen-ventas');
+
 });
