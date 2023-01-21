@@ -1,9 +1,7 @@
 @extends('layouts.inicio')
 @section('title', 'Lista de Productos')
 @section('css')
-    {{-- <link rel="stylesheet" href="{{ asset('css/Datatables/select.dataTables.min.css') }}"> --}}
     <link rel="stylesheet" href="{{ asset('css/Datatables/data-tables.min.css') }}">
-    {{-- <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css"> --}}
 @endsection
 
 @section('content')
@@ -36,6 +34,9 @@
                                 @isset($item->precio->precio)
                                     <td>{!! Str::miles($item->precio->precio) !!}</td>
                                 @endisset
+                                @isset($item->stock->precio_compra)
+                                <td>{!! isset($item->stock->precio_compra->precio)? Str::miles($item->stock->precio_compra->precio): 0 !!}</td>
+                            @endisset
                               
                                 <td><a onclick="editar(this)" id="{!! $item->codigo !!}"
                                         class="invoice-action-edit mr-4 green-text lightrn-1 modal-trigger"
@@ -65,6 +66,8 @@
         <script>
             $(document).ready(function() {
                 $('.modal').modal();
+        $('#listaProductos').DataTable();
+
                 // $('#listaProductos').DataTable();
                 // $('#listaProductos').DataTable({scrollY:700,scrollX:!0});
             });

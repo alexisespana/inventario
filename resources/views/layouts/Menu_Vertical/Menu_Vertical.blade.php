@@ -26,8 +26,11 @@
                                 data-i18n="Analytics">Lista de Productos</span></a>
                     </li>
                     <li><a href="/ventas/resumen"><i class="material-icons">radio_button_unchecked</i><span
-                        data-i18n="Analytics">Gráfico Ventas</span></a>
-            </li>
+                                data-i18n="Analytics">Gráfico Ventas</span></a>
+                    </li>
+                    <li><a href="/productos/vencidos"><i class="material-icons">radio_button_unchecked</i><span
+                                data-i18n="Analytics">Producto por Vencer</span></a>
+                    </li>
                 </ul>
             </div>
         </li>
@@ -35,12 +38,11 @@
         <li class="navigation-header"><a class="navigation-header-text">Applications</a><i
                 class="navigation-header-icon material-icons">more_horiz</i>
         </li>
-    </li>
-    <li class="bold"><a class="waves-effect waves-cyan " href="/productos/Ingresar"><i
-                class="material-icons">mail_outline</i><span class="menu-title"
-                data-i18n="Mail">Ingresar Productos</span><span
-                class="badge new badge pill pink accent-2 float-right mr-2">5</span></a>
-    </li>
+        </li>
+        <li class="bold"><a class="waves-effect waves-cyan " href="/productos/Ingresar"><i
+                    class="material-icons">mail_outline</i><span class="menu-title" data-i18n="Mail">Ingresar
+                    Productos</span><span class="badge new badge pill pink accent-2 float-right mr-2">5</span></a>
+        </li>
     </ul>
     <div class="navigation-background"></div><a
         class="sidenav-trigger btn-sidenav-toggle btn-floating btn-medium waves-effect waves-light hide-on-large-only"

@@ -27,7 +27,10 @@ class AppServiceProvider extends ServiceProvider
     {
         Str::macro('miles', function ($price)
         {
-            return ' $ '.number_format($price, 0, '', '.');
+            if($price){
+
+                return ' $ '.number_format($price, 0, '', '.');
+            }
         });
 
         Str::macro('fecha', function ($price)

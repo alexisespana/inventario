@@ -41,6 +41,12 @@ class ProductosServiceProvider extends ServiceProvider
         $response = $this->initialice('POST', "Productos/editar", $idproducto);
         return $response;
     }
+    public function productosVencidos($productos)
+    {
+
+        $response = $this->initialice('POST', "Productos/productosVencidos", $productos);
+         return $response;
+    }
 
     
     private function initialice($method, $url, $data)
