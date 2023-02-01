@@ -92,7 +92,7 @@ class ListarProductosController extends Controller
 
         if ($request->isMethod('post')) {
             $prod_vencidos = $this->ProductosServiceProvider->productosVencidos('');
-            //  dd($prod_vencidos[1]);
+              //dd($prod_vencidos[400]);
             $data = collect($prod_vencidos)->map(function ($prodVencidos, $index) {
 
                 // if (isset($prodVencidos->beneficio)) {
@@ -103,12 +103,12 @@ class ListarProductosController extends Controller
                         'index' => $index,
                         'id_prod' => $prodVencidos->id,
                         'productos' => $prodVencidos->nombre,
-                        'cantidad' => $prodVencidos->cantidad,
-                        'precio_venta' => $prodVencidos->porecio_venta,
-                        'precio_compra' => $prodVencidos->precio_compra,
-                        'fecha_ingreso' =>  $prodVencidos->fecha_ingreso,
-                        'fecha_venc' =>  $prodVencidos->fecha_venc
-
+                        'cantidad' => isset($prodVencidos->stock->cantidad) ? $prodVencidos->stock->cantidad :0,
+                        'precio_venta' => isset($prodVencidos->precio->precio) ? $prodVencidos->precio->precio :0,
+                        'precio_compra' =>  isset($prodVencidos->stock->precio_compra->precio) ? $prodVencidos->stock->precio_compra->precio :0,
+                        'fecha_ingreso' =>  isset($prodVencidos->stock->fecha_ingreso) ? $prodVencidos->stock->fecha_ingreso :0,
+                        'fecha_venc' =>  isset($prodVencidos->stock->fecha_venc) ? $prodVencidos->stock->fecha_venc :0,
+                        'total_precio' =>  isset($prodVencidos->stock->fecha_venc) ? $prodVencidos->stock->fecha_venc :0,
                     ];
                 // }
                 // }
@@ -121,14 +121,15 @@ class ListarProductosController extends Controller
             return DataTables::of($data)
                 ->addIndexColumn()
 
-                // ->with('count', function () use ($TotalBecassAntiguos) {
-                //     return ($TotalBecassAntiguos);
-                // })
-                // ->addColumn('view', function ($data) {
-                //     $btn = '<button type="button" class="view btn btn-light" data-idcpbt="' . $data->nombre_corto_carrera . '"><i class="c-icon cil-touch-app"></i></button>';
-                //     return $btn;
-                // })
-                // ->rawColumns(['view'])
+                ->addColumn('total', function ($data) 
+                {
+                      if ($data )
+                    {
+                        $btn = ($data['precio_compra']*$data['cantidad']);
+                    }
+
+                    return $btn;
+                })
                 ->make(true);
 
             // return $prod_vencidos;

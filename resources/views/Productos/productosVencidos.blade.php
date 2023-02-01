@@ -22,6 +22,7 @@
                             <th>Precio compra</th>
                             <th>fecha_ing</th>
                             <th>fecha_venc</th>
+                            <th>total</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -30,11 +31,14 @@
                     <tfoot class="text-center">
                         <tr>
                             <th></th>
-                            {{-- <th></th>
-                                <th></th> --}}
                             <th></th>
                             <th></th>
-                            {{-- <th></th> --}}
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                          
+                           
                             <th></th>
 
 
@@ -155,6 +159,7 @@
                         $(api.column(1).footer()).html(suma(api, 2)).addClass('text-center');
                         $(api.column(2).footer()).html(suma(api, 3));
                         $(api.column(3).footer()).html(suma(api, 4));
+                        $(api.column(6).footer()).html(suma(api, 7));
                         // $(api.column(4).footer()).html(suma(api, 5));
                     },
                     columns: [{
@@ -201,6 +206,10 @@
                         {
                             data: 'fecha_venc',
                             name: 'fecha_venc'
+                        },
+                        {
+                            data: 'total',
+                            name: 'total'
                         },
 
                     ],

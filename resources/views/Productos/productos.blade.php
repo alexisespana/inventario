@@ -67,6 +67,10 @@
             $(document).ready(function() {
                 $('.modal').modal();
         $('#listaProductos').DataTable();
+        $('.date').mask('00/00/0000', {
+                min: new Date(1990, 0, 1),
+                max: new Date(2020, 0, 1),
+            });
 
                 // $('#listaProductos').DataTable();
                 // $('#listaProductos').DataTable({scrollY:700,scrollX:!0});

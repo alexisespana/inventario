@@ -39,6 +39,20 @@
                     </div>
                 </div>
                 <div class="row">
+                    <div class="input-field col s6">
+                        <i class="material-icons prefix">account_circle</i>
+                        <input id="fecha_ing" type="text" class="date" name="fecha_ingreso" value="{!! $editarProductos[0]->stock->fecha_ingreso !!}"
+                            class="validate">
+                        <label class="active" for="fecha_ing">Fecha Ingreso</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <i class="material-icons prefix">account_circle</i>
+                        <input id="fecha_venc" type="text" class="date" name="fecha_venc" value="{!! isset( $editarProductos[0]->stock->fecha_venc ) ?  $editarProductos[0]->stock->fecha_venc : '00/00/00'!!}"
+                            class="validate">
+                        <label class="active" for="fecha_venc">Fecha Vencimiento</label>
+                    </div>
+                </div>
+                <div class="row">
                     <button class="btn cyan waves-effect waves-light right" type="submit" name="action">Guardar
                         <i class="material-icons right">send</i>
                     </button>
@@ -51,3 +65,13 @@
     <a href="#!" class="modal-action modal-close waves-effect waves-red btn-flat ">Cerrar</a>
 
 </div>
+<script>
+    $(document).ready(function() {
+      
+$('.date').mask('00/00/0000', {
+        min: new Date(1990, 0, 1),
+        max: new Date(2020, 0, 1),
+    });
+    });
+</script>
+    
