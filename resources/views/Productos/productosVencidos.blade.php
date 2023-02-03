@@ -23,6 +23,8 @@
                             <th>fecha_ing</th>
                             <th>fecha_venc</th>
                             <th>total</th>
+                            <th>total</th>
+                            <th>Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -37,8 +39,8 @@
                             <th></th>
                             <th></th>
                             <th></th>
-                          
-                           
+
+
                             <th></th>
 
 
@@ -59,10 +61,11 @@
             $(document).ready(function() {
 
                 $('#listaProductos').DataTable();
-                productoscecidos();
+                productosVencidos();
+                $('.modal').modal();
             });
 
-            function productoscecidos() {
+            function productosVencidos() {
                 var url = " {{ route('productos-vencidos') }}";
                 var token = $("input[name=_token]").val();
                 var tipo_grado = $("#tipo_grado").val();
@@ -77,7 +80,7 @@
 
                     select: true,
                     paging: true,
-                   
+
 
                     buttons: [{
                         extend: 'collection',
@@ -145,11 +148,11 @@
                         var suma = function(api, column) {
 
                             return numberRenderer(api
-                            .column(column)
-                            .data()
-                            .reduce(function(a, b) {
-                                return intVal(a) + intVal(b);
-                            }, 0));
+                                .column(column)
+                                .data()
+                                .reduce(function(a, b) {
+                                    return intVal(a) + intVal(b);
+                                }, 0));
 
 
                         };
@@ -189,27 +192,50 @@
                         // },
                         {
                             data: 'cantidad',
-                            name: 'cantidad'
+                            name: 'cantidad',
+                            className: 'text-center',
                         },
                         {
                             data: 'precio_venta',
-                            name: 'precio_venta'
+                            name: 'precio_venta',
+                            className: 'text-center',
+
                         },
                         {
                             data: 'precio_compra',
-                            name: 'precio_compra'
+                            name: 'precio_compra',
+                            className: 'text-center',
+
                         },
                         {
                             data: 'fecha_ingreso',
-                            name: 'fecha_ingreso'
+                            name: 'fecha_ingreso',
+                            className: 'text-center',
+
                         },
                         {
                             data: 'fecha_venc',
-                            name: 'fecha_venc'
+                            name: 'fecha_venc',
+                            className: 'text-center',
+
                         },
                         {
                             data: 'total',
-                            name: 'total'
+                            name: 'total',
+                            className: 'text-center',
+
+                        },
+                        {
+                            data: 'unidad_medida',
+                            name: 'unidad_medida',
+                            className: 'text-center',
+
+                        },
+                        {
+                            data: 'acciones',
+                            name: 'acciones',
+                            orderable: false,
+                            searchable: false,
                         },
 
                     ],
@@ -225,6 +251,97 @@
                 var tipo_grado = $("#tipo_grado option:selected").text();
                 $(".titulo_central").text('Matrículas ' + tipo_grado + ' por Año: ' + anio_selecionado);
             }
+
+            function editar(obj) {
+                var id = $(obj).attr('id');
+                var url = '/productos/editar';
+                var vista = 'editarProductos';
+                var type = 'GET';
+                ajax(id, vista, url, type);
+            }
+
+
+            function ajax(id, vista, url, type) {
+                $('#editarProductos').empty();
+
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+
+                //we will send data and recive data fom our AjaxController
+                $.ajax({
+                    url: url,
+                    data: {
+                        'codigo': id,
+                        'vista': vista,
+                    },
+                    type: type,
+                    success: function(response) {
+                        
+                        $('.modal').append(response);
+                    },
+                    statusCode: {
+                        404: function() {
+                            alert('web not found');
+                        }
+                    },
+                    error: function(x, xs, xt) {
+                        //nos dara el error si es que hay alguno
+                        // window.open(JSON.stringify(x));
+                        console.log('error: ' + JSON.stringify(x) + "\n error string: " + xs +
+                            "\n error throwed: " + xt);
+                    }
+                });
+            }
+
+            $(document).on('click', '.modificar_prod', function(event) {
+              
+                let id = $('#id_prod').val();
+                let nombre  = $('#nombre').val();
+                let cantidad  = $('#cantidad').val();
+                let precio  = $('#precio').val();
+                let fecha_ingreso  = $('#fecha_ingreso').val();
+                let fecha_venc  = $('#fecha_venc').val();
+              
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+
+                //we will send data and recive data fom our AjaxController
+                $.ajax({
+                    url: '{{ route('editar.productos') }}',
+                    data: {
+                        'id': id,
+                        'nombre': nombre,
+                        'cantidad': cantidad,
+                        'precio': precio,
+                        'fecha_ingreso': fecha_ingreso,
+                        'fecha_venc': fecha_venc,
+                    },
+                    type: 'post',
+                    success: function(response) {
+                        $('.modal').modal('close');
+
+                        productosVencidos();
+
+                    },
+                    statusCode: {
+                        404: function() {
+                            alert('web not found');
+                        }
+                    },
+                    error: function(x, xs, xt) {
+                        //nos dara el error si es que hay alguno
+                        // window.open(JSON.stringify(x));
+                        console.log('error: ' + JSON.stringify(x) + "\n error string: " + xs +
+                            "\n error throwed: " + xt);
+                    }
+                });
+            });
         </script>
 
     @stop

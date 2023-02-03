@@ -76,12 +76,14 @@ class ListarProductosController extends Controller
 
             // dd($editarProductos);
 
-            return redirect('productos/lista')->with('mensaje', 'producto actualizado');
+            return response()->json([
+                'data' => $editarProductos
+            ]);
         }
 
         $editarProductos = $this->ProductosServiceProvider->listarProductos($request->all());
 
-        // dd($editarProductos);
+        //  dd($request->all(),$editarProductos);
 
         return view('Productos/' . $request->vista, compact('editarProductos'));
     }
@@ -92,7 +94,7 @@ class ListarProductosController extends Controller
 
         if ($request->isMethod('post')) {
             $prod_vencidos = $this->ProductosServiceProvider->productosVencidos('');
-              //dd($prod_vencidos[400]);
+            //   dd($prod_vencidos[400]);
             $data = collect($prod_vencidos)->map(function ($prodVencidos, $index) {
 
                 // if (isset($prodVencidos->beneficio)) {
@@ -101,19 +103,20 @@ class ListarProductosController extends Controller
                 return
                     [
                         'index' => $index,
-                        'id_prod' => $prodVencidos->id,
+                        'codigo_prod' => $prodVencidos->codigo,
                         'productos' => $prodVencidos->nombre,
-                        'cantidad' => isset($prodVencidos->stock->cantidad) ? $prodVencidos->stock->cantidad :0,
-                        'precio_venta' => isset($prodVencidos->precio->precio) ? $prodVencidos->precio->precio :0,
-                        'precio_compra' =>  isset($prodVencidos->stock->precio_compra->precio) ? $prodVencidos->stock->precio_compra->precio :0,
-                        'fecha_ingreso' =>  isset($prodVencidos->stock->fecha_ingreso) ? $prodVencidos->stock->fecha_ingreso :0,
-                        'fecha_venc' =>  isset($prodVencidos->stock->fecha_venc) ? $prodVencidos->stock->fecha_venc :0,
-                        'total_precio' =>  isset($prodVencidos->stock->fecha_venc) ? $prodVencidos->stock->fecha_venc :0,
+                        'cantidad' => isset($prodVencidos->stock->cantidad) ? $prodVencidos->stock->cantidad : 0,
+                        'precio_venta' => isset($prodVencidos->precio->precio) ? $prodVencidos->precio->precio : 0,
+                        'precio_compra' =>  isset($prodVencidos->stock->precio_compra->precio) ? $prodVencidos->stock->precio_compra->precio : 0,
+                        'fecha_ingreso' =>  isset($prodVencidos->stock->fecha_ingreso) ? $prodVencidos->stock->fecha_ingreso : 0,
+                        'fecha_venc' =>  isset($prodVencidos->stock->fecha_venc) ? $prodVencidos->stock->fecha_venc : 0,
+                        'unidad_medida' => isset($prodVencidos->unidad_medida->id) ? $prodVencidos->unidad_medida->id : 0,
+                        'total_precio' =>  isset($prodVencidos->stock->fecha_venc) ? $prodVencidos->stock->fecha_venc : 0,
                     ];
                 // }
                 // }
             });
-            //    dd($data);
+            //  dd($data);
 
 
 
@@ -121,15 +124,24 @@ class ListarProductosController extends Controller
             return DataTables::of($data)
                 ->addIndexColumn()
 
-                ->addColumn('total', function ($data) 
-                {
-                      if ($data )
-                    {
-                        $btn = ($data['precio_compra']*$data['cantidad']);
+                ->addColumn('total', function ($data) {
+                    if ($data['unidad_medida'] == 1) {
+                        $btn = ($data['precio_compra'] * $data['cantidad']);
+                    } else {
+                        $btn = ($data['precio_venta'] * ($data['cantidad'] / 1000));
                     }
 
                     return $btn;
                 })
+                ->addColumn('acciones', function ($data) {
+                    $btn = '<a onclick="editar(this)" id="'.$data['codigo_prod'].'"
+                    class="invoice-action-edit mr-4 green-text lightrn-1 modal-trigger"
+                    href="#editarProductos">
+                    <i class="material-icons">edit</i></a>';
+                    return $btn;
+                })
+                ->rawColumns(['total', 'acciones'])
+
                 ->make(true);
 
             // return $prod_vencidos;

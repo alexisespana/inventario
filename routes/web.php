@@ -23,7 +23,7 @@ Route::prefix('productos')->group(function () {
     Route::post('/Ingresar', [ListarProductosController::class, 'ingresarProductos'])->name('registrar-productos');
     Route::get('/lista', [ListarProductosController::class, 'listarProductos'])->name('lista-productos');
     Route::get('/editar', [ListarProductosController::class, 'editarProductos'])->name('editar-productos');
-    Route::post('/Editar', [ListarProductosController::class, 'editarProductos'])->name('editar-productos');
+    Route::post('/Editar', [ListarProductosController::class, 'editarProductos'])->name('editar.productos');
     Route::get('/buscar', [ListarProductosController::class, 'buscarProductos'])->name('buscar-productos');
     Route::get('/detallesProductos', [ListarProductosController::class, 'editarProductos'])->name('detalles-productos');
     Route::any('/vencidos', [ListarProductosController::class, 'productosVencidos'])->name('productos-vencidos');
